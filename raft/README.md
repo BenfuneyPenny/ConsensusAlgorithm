@@ -66,6 +66,8 @@ Leader日志完整性：选举阶段即使用Term来保证Leader日志完整性�
 ### 参考文档
 
 * [寻找一种易于理解的一致性算法（扩展版）](https://github.com/maemual/raft-zh_cn/blob/master/raft-zh_cn.md)
+* [一致性算法Raft详解](http://www.solinx.co/archives/415?utm_source=tuicool&utm_medium=referral)
+* [Raft 为什么是更易理解的分布式一致性算法](https://www.cnblogs.com/mindwind/p/5231986.html)
 
 ### 后记
 
