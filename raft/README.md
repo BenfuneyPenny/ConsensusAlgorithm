@@ -42,7 +42,7 @@ Term使用连续递增的编号表示，初始时所有Follower的Term均为1。
 有如下几种可能：
 
 * 1、收到过半数节点（n/2+1）投票，由Candidate转换为Leader，向其他节点发送心跳以维持领导者地位。
-* 2、如果收到其他节点发送的AppendEntries RPC请求，且该节点Term大于当前节点Term，转换为Follower，否则保持Candidate拒绝该请求。
+* 2、如果收到其他节点发送的AppendEntries RPC请求，且该节点Term大于当前节点Term，即发现了新的有效领导者，转换为Follower，否则保持Candidate拒绝该请求。
 * 3、选举超时，Term递增，重新发起选举。
 
 每轮Term期间，每个节点均只能投票1次，如果多个Candidate均没有接收到过半数投票，则每个Candidate Term递增，重启定时器并重新发起选举。
@@ -52,16 +52,23 @@ Term使用连续递增的编号表示，初始时所有Follower的Term均为1。
 
 保证节点的一致性，就要保证所有节点都按顺序执行相同的操作序列，日志复制目的即为此。
 
-* 1、Leader接收到客户端事务请求（即日志），先将日志追加到本地Log中，并通过心跳同步给其他Follower。
-* 2、Follower接收到日志后，记录日志，并向Leader发送ACK消息。
-* 3、Leader收到过半数Follower的ACK消息后，将日志置为已提交并写入本地磁盘，通知客户端，并在下个心跳中通知Follower写入本地磁盘。
+* 1、Leader接收到客户端事务请求（即日志），先将日志追加到本地Log中，并通过AppendEntries RPC复制给其他Follower。
+* 2、Follower接收到日志后，追加到本地Log中，并向Leader发送ACK消息。
+* 3、Leader收到过半数Follower的ACK消息后，将日志置为已提交并正式提交日志，通知客户端，并发送AppendEntries RPC请求通知Follower提交日志。
 
 ### 安全性
 
-选举安全性：即每个Term期间只能选举一个Leader。
+* 1、每个Term期间只能选举一个Leader。
+* 2、Leader不会删除或覆盖已有日志条目，只会追加。
+* 3、如果相同索引位置的日志条目Term任期号相同，那么认为从头到这个索引位置均相同。
+* 4、如果某个日志条目在某任期内提交，那么这个日志条目必然出现在更大的Term任期号的所有领导中。
+* 5、如果Leader在某索引位置的日志条目已提交，那么其他节点相同索引位置不会提交不同的日志条目。
 
-Leader日志完整性：选举阶段即使用Term来保证Leader日志完整性，即之前Term中已提交的日志，在新的Term中必须包含。
-即：当请求投票的Candidate的Term较大，或Term相同Index更大时则投票，否则拒绝该请求。
+### RequestVote RPC和AppendEntries RPC
+
+Raft中节点通信使用两种RPC，即RequestVote RPC和AppendEntries RPC：
+RequestVote RPC：即请求投票，由Candidate在选举期间发起。
+AppendEntries RPC：即附加条目RPC，由Leader发起，用于日志复制和心跳机制。
 
 ### 参考文档
 
