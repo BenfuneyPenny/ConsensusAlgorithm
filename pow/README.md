@@ -417,9 +417,12 @@ func (ethash *Ethash) mine(block *types.Block, id int, seed uint64, abort chan s
 * block_number：当前区块的序号
 
 当前区块难度即：
-* block_diff = parent_diff
-* + (parent_diff / 2048 * max(1 - (block_timestamp - parent_timestamp) // 10, -99)
-* + 2^((block_number // 100000) - 2)
+
+```
+block_diff = parent_diff
++ (parent_diff / 2048 * max(1 - (block_timestamp - parent_timestamp) // 10, -99)
++ 2^((block_number // 100000) - 2)
+```
 
 其中//为整数除法运算符，a//b，即先计算a/b，然后取不大于a/b的最大整数。
 
