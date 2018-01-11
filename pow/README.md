@@ -378,7 +378,7 @@ func (ethash *Ethash) mine(block *types.Block, id int, seed uint64, abort chan s
 				ethash.hashrate.Mark(attempts)
 				attempts = 0
 			}
-			//hashimotoFull即
+			//hashimotoFull即RAND(h, n)所代表的一系列的复杂运算
 			digest, result := hashimotoFull(dataset, hash, nonce)
 			//result满足RAND(h, n)  <=  M / d
 			if new(big.Int).SetBytes(result).Cmp(target) <= 0 {
@@ -411,10 +411,10 @@ func (ethash *Ethash) mine(block *types.Block, id int, seed uint64, abort chan s
 此处以calcDifficultyHomestead为例。
 
 计算难度时输入有：
-parent_timestamp：父区块时间戳
-parent_diff：父区块难度
-block_timestamp：当前区块时间戳
-block_number：当前区块的序号
+* parent_timestamp：父区块时间戳
+* parent_diff：父区块难度
+* block_timestamp：当前区块时间戳
+* block_number：当前区块的序号
 
 当前区块难度即：block_diff = parent_diff
 　　+ (parent_diff / 2048 * max(1 - (block_timestamp - parent_timestamp) // 10, -99)
@@ -476,3 +476,10 @@ func calcDifficultyHomestead(time uint64, parent *types.Header) *big.Int {
 //代码位置consensus/ethash/consensus.go
 ```
 
+### 后记
+
+Pow算法概念简单，即工作端提交难以计算但易于验证的计算结果，其他节点通过验证这个结果来确信工作端完成了相当的工作量。
+但其缺陷也很明显：1、随着节点将CPU挖矿升级为GPU、甚至矿机挖矿，节点数和算力已渐渐失衡；
+2、比特币等网络每秒需完成数百万亿次哈希计算，资源大量浪费。
+为此，业内提出了Pow的替代者如PoS权益证明算法，即要求用户拥有一定数量的货币，才有权参与确定下一个合法区块。
+另外，相对拥有51%算力，购买超过半数以上的货币难度更大，也使得恶意攻击更加困难。
