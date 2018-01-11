@@ -1,4 +1,4 @@
-# PoW挖矿算法及其在比特币、以太坊中的实现
+# PoW挖矿算法原理及其在比特币、以太坊中的实现
 
 PoW，全称Proof of Work，即工作量证明，又称挖矿。
 大部分公有链或虚拟货币，如比特币、以太坊，均基于PoW算法，来实现其共识机制。
@@ -416,7 +416,7 @@ func (ethash *Ethash) mine(block *types.Block, id int, seed uint64, abort chan s
 * block_timestamp：当前区块时间戳
 * block_number：当前区块的序号
 
-当前区块难度即：
+当前区块难度计算公式，即：
 
 ```
 block_diff = parent_diff
