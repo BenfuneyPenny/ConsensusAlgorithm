@@ -259,18 +259,18 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
 以太坊区块由Header和Body两部分组成。
 
 其中Header部分成员如下：
-ParentHash，父区块哈希
-UncleHash，叔区块哈希，具体为Body中Uncles数组的RLP哈希值。RLP哈希，即某类型对象RLP编码后做SHA3哈希运算。
-Coinbase，矿工地址。
-Root，StateDB中state Trie根节点RLP哈希值。
-TxHash，Block中tx Trie根节点RLP哈希值。
-ReceiptHash，Block中Receipt Trie根节点的RLP哈希值。
-Difficulty，区块难度，即当前挖矿难度。
-Number，区块序号，即父区块Number+1。
-GasLimit，区块内所有Gas消耗的理论上限，创建时指定，由父区块GasUsed和GasLimit计算得出。
-GasUsed，区块内所有Transaction执行时消耗的Gas总和。
-Time，当前时间戳。
-Nonce，随机数Nonce值。
+* ParentHash，父区块哈希
+* UncleHash，叔区块哈希，具体为Body中Uncles数组的RLP哈希值。RLP哈希，即某类型对象RLP编码后做SHA3哈希运算。
+* Coinbase，矿工地址。
+* Root，StateDB中state Trie根节点RLP哈希值。
+* TxHash，Block中tx Trie根节点RLP哈希值。
+* ReceiptHash，Block中Receipt Trie根节点的RLP哈希值。
+* Difficulty，区块难度，即当前挖矿难度。
+* Number，区块序号，即父区块Number+1。
+* GasLimit，区块内所有Gas消耗的理论上限，创建时指定，由父区块GasUsed和GasLimit计算得出。
+* GasUsed，区块内所有Transaction执行时消耗的Gas总和。
+* Time，当前时间戳。
+* Nonce，随机数Nonce值。
 
 有关叔区块：
 叔区块，即孤立的块。以太坊成块速度较快，导致产生孤块。
@@ -278,13 +278,13 @@ Nonce，随机数Nonce值。
 在以太坊中，主链是指最重的链。
 
 有关state Trie、tx Trie和Receipt Trie：
-state Trie，所有账户对象可以逐个插入一个Merkle-PatricaTrie(MPT)结构中，形成state Trie。
-tx Trie：Block中Transactions中所有tx对象，逐个插入MPT结构中，形成tx Trie。
-Receipt Trie：Block中所有Transaction执行后生成Receipt数组，所有Receipt逐个插入MPT结构中，形成Receipt Trie。
+* state Trie，所有账户对象可以逐个插入一个Merkle-PatricaTrie(MPT)结构中，形成state Trie。
+* tx Trie：Block中Transactions中所有tx对象，逐个插入MPT结构中，形成tx Trie。
+* Receipt Trie：Block中所有Transaction执行后生成Receipt数组，所有Receipt逐个插入MPT结构中，形成Receipt Trie。
 
 Body成员如下：
-Transactions，交易列表。
-Uncles，引用的叔区块列表。
+* Transactions，交易列表。
+* Uncles，引用的叔区块列表。
 
 go-ethereum-1.7.3源码中区块头和区块定义：
 
