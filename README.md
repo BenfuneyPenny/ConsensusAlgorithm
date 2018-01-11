@@ -4,3 +4,4 @@
 * [分布式一致性算法Paxos](paxos/README.md)
 * [分布式一致性算法Raft](raft/README.md)
 * [PoW挖矿算法原理及其在比特币、以太坊中的实现](pow/README.md)
+* [PoS权益证明算法原理及其在点点币、黑币中的使用](pos/README.md)

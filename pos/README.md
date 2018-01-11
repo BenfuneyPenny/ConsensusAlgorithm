@@ -270,6 +270,11 @@ static bool CheckStakeKernelHashV2(CBlockIndex* pindexPrev, unsigned int nBits, 
 }
 ```
 
+### 附录
+
+* [点点币github](https://github.com/peercoin)
+* [黑币github](https://github.com/CoinBlack/blackcoin)
+
 ### 后记
 
 PoS有种种优点，但也有所缺陷。
