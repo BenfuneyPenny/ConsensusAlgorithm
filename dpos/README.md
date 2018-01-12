@@ -24,7 +24,7 @@ DPoS这种设计使得区块生成更快捷，也更节能。
 投票选出的N个见证人，可以视为N个矿池。
 如果它们提供的算力不稳定、宕机、或者作恶，持股人可以随时投票更换见证人。
 
-### 参考文章
+### 扩展阅读
 
 * [股份授权证明机制（DPOS）](http://blog.sina.com.cn/s/blog_6ab284e40102v0nw.html)
 * [缺失的白皮书：DPOS共识算法工作原理及鲁棒性根源分析](https://www.leiphone.com/news/201706/JfsBmaf6Y0ZtV11R.html)
