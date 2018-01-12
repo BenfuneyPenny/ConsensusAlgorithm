@@ -6,5 +6,4 @@
 * [PoW挖矿算法原理及其在比特币、以太坊中的实现](pow/README.md)
 * [PoS权益证明算法原理及其在点点币、黑币中的使用](pos/README.md)
 * [DPoS股份授权证明算法概述](dpos/README.md)
-
 * [全球市值Top20的加密货币技术对比](top20/README.md)
