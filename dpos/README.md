@@ -28,7 +28,7 @@ DPoS这种设计使得区块生成更快捷，也更节能。
 
 * [股份授权证明机制（DPOS）](http://blog.sina.com.cn/s/blog_6ab284e40102v0nw.html)
 * [缺失的白皮书：DPOS共识算法工作原理及鲁棒性根源分析](https://www.leiphone.com/news/201706/JfsBmaf6Y0ZtV11R.html)
-* [比特股环境搭建)(http://www.blockchainbrother.com/article/53)
+* [比特股环境搭建](http://www.blockchainbrother.com/article/53)
 * [bitshares-core](https://github.com/bitshares/bitshares-core)
 * [浅析 BitShares 2.0 的引荐机制及终身会员的各种玩法](http://8btc.com/thread-38026-1-1.html)
 * [股份授权证明机制简介（DPOS Consensus Algorithm）](https://www.jianshu.com/p/3d9c751b2ac8)
