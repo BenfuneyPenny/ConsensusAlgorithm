@@ -1,4 +1,4 @@
-# PoS权益证明算法原理及其在点点币、黑币中的使用
+# PoS权益证明算法原理及其在点点币、黑币中的实现
 
 PoS，即Proof of Stake，译为权益证明。
 无论PoW或PoS，均可以理解为“谁有资格写区块链”的问题。
@@ -128,8 +128,8 @@ bool CheckStakeKernelHash(unsigned int nBits, const CBlockHeader& blockFrom, uns
 当前区块目标值 = 前一个区块目标值 x (1007x10x60 + 2x前两个区块时间间隔) / (1009x10x60)
 
 由公式可见，两个区块目标间隔时间即为10分钟。
-如果前两个区块时间间隔>10分钟，目标值会提高，即当前区块难度会降低。
-反之，如果前两个区块时间间隔<10分钟，目标值会降低，即当前区块难度会提高。
+如果前两个区块时间间隔大于10分钟，目标值会提高，即当前区块难度会降低。
+反之，如果前两个区块时间间隔小于10分钟，目标值会降低，即当前区块难度会提高。
 
 peercoin-0.6.1ppc中目标值计算代码如下：
 
@@ -182,7 +182,7 @@ PoS2.0相比PoS的改进：
 
 　　proofhash < 币数x目标值
 
-点点币中，部分节点平时保持离线，只在积累了客观的币龄以后才连线获取利息，然后再次离线。
+点点币中，部分节点平时保持离线，只在积累了可观的币龄以后才连线获取利息，然后再次离线。
 PoS 2.0中拿掉币龄，使得积攒币龄的方法不再有效，所有节点必须更多的保持在线，以进行权益累积。
 越多的节点在线进行权益累积，系统遭遇51%攻击的可能性就越低。
 
@@ -274,9 +274,11 @@ static bool CheckStakeKernelHashV2(CBlockIndex* pindexPrev, unsigned int nBits, 
 
 * [点点币github](https://github.com/peercoin)
 * [黑币github](https://github.com/CoinBlack/blackcoin)
+* [点点币白皮书（中文版）](https://github.com/fengchunjian/ConsensusAlgorithm/blob/master/pos/%E7%82%B9%E7%82%B9%E5%B8%81%E7%99%BD%E7%9A%AE%E4%B9%A6%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89.pdf)
+* [黑币PoS协议2.0版白皮书](https://github.com/fengchunjian/ConsensusAlgorithm/blob/master/pos/%E9%BB%91%E5%B8%81PoS%E5%8D%8F%E8%AE%AE2.0%E7%89%88%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf)
 
 ### 后记
 
 PoS有种种优点，但也有所缺陷。
 即因为PoS并不消耗更多的算力，因此如果出现分叉，理性节点会在所有链上同时PoS挖矿。
-以至于每次分叉都会形成新的山寨币。
+以至于每次分叉都会形成新的山寨币，即PoS无法很好的应对分叉。
