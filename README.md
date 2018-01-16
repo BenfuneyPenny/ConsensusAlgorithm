@@ -7,3 +7,4 @@
 * [PoS权益证明算法原理及其在点点币、黑币中的使用](pos/README.md)
 * [DPoS股份授权证明算法概述](dpos/README.md)
 * [全球市值Top20的加密货币技术对比](top20/README.md)
+* [比特币CPU挖矿、GPU挖矿、矿池及矿机挖矿技术原理](mine/README.md)
